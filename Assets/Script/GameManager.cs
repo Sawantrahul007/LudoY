@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     public int totalplayercanplay;
     private void Awake()
     {
+        
         selfDice = false;
         isPlayerabletomove = true;
         gm = this;
@@ -72,17 +73,48 @@ public class GameManager : MonoBehaviour
         }
     }
     public void SelfRoll()
-    {
-        if(GameManager.gm.totalplayercanplay==1 && GameManager.gm.rollingd == GameManager.gm.manageRollingDice[2])
+    {//chng
+        if((GameManager.gm.totalplayercanplay == 7 || GameManager.gm.totalplayercanplay == 8) && GameManager.gm.rollingd == GameManager.gm.manageRollingDice[1])
+        {
+            Invoke("rolledx1", 0.6f);
+        }
+        else if((GameManager.gm.totalplayercanplay == 7 || GameManager.gm.totalplayercanplay == 8) && GameManager.gm.rollingd == GameManager.gm.manageRollingDice[2])
+        {
+            Invoke("rolledx2", 0.6f);
+        }
+        else if ((GameManager.gm.totalplayercanplay == 7 || GameManager.gm.totalplayercanplay == 8) && GameManager.gm.rollingd == GameManager.gm.manageRollingDice[3])
+        {
+            Invoke("rolledx3", 0.6f);
+        }
+        //chng
+        if (GameManager.gm.totalplayercanplay==1 && GameManager.gm.rollingd == GameManager.gm.manageRollingDice[2])
         {
             Invoke("rolled", 0.6f);
         }
     }
     void rolled()
     {
-        Debug.Log("ll");
+        //Debug.Log("ll");
         GameManager.gm.manageRollingDice[2].MouseRoll();
     }
+    //chng
+    void rolledx1()
+    {
+        Debug.Log("ll");
+        GameManager.gm.manageRollingDice[1].MouseRoll();
+
+    }
+    void rolledx2()
+    {
+        Debug.Log("rr");
+        GameManager.gm.manageRollingDice[2].MouseRoll();
+    }
+    void rolledx3()
+    {
+        Debug.Log("rr");
+        GameManager.gm.manageRollingDice[3].MouseRoll();
+    }
+    //chng
     void ShiftPos()
     {
         int nextdice;
@@ -137,6 +169,66 @@ public class GameManager : MonoBehaviour
                     GameManager.gm.manageRollingDice[nextdice].gameObject.SetActive(true);
                 }
             }
+        }else if (totalplayercanplay == 7)
+        {
+            
+            if (GameManager.gm.rollingd == GameManager.gm.manageRollingDice[0])
+            {
+                Debug.Log("RRR");
+                GameManager.gm.manageRollingDice[0].gameObject.SetActive(false);
+                GameManager.gm.manageRollingDice[1].gameObject.SetActive(true);
+                GameManager.gm.manageRollingDice[1].MouseRoll();
+            }
+            
+            else if (GameManager.gm.rollingd == GameManager.gm.manageRollingDice[1])
+            {
+                Debug.Log("RRR");
+                GameManager.gm.manageRollingDice[1].gameObject.SetActive(false);
+                GameManager.gm.manageRollingDice[2].gameObject.SetActive(true);
+                GameManager.gm.manageRollingDice[2].MouseRoll();
+            }
+            else if (GameManager.gm.rollingd == GameManager.gm.manageRollingDice[2])
+            {
+                Debug.Log("RRR");
+                GameManager.gm.manageRollingDice[2].gameObject.SetActive(false);
+                GameManager.gm.manageRollingDice[0].gameObject.SetActive(true);
+                //GameManager.gm.manageRollingDice[2].MouseRoll();
+            }
+
+        }
+        else if (totalplayercanplay == 8)
+        {
+
+            if (GameManager.gm.rollingd == GameManager.gm.manageRollingDice[0])
+            {
+                Debug.Log("RRR");
+                GameManager.gm.manageRollingDice[0].gameObject.SetActive(false);
+                GameManager.gm.manageRollingDice[1].gameObject.SetActive(true);
+                GameManager.gm.manageRollingDice[1].MouseRoll();
+            }
+
+            else if (GameManager.gm.rollingd == GameManager.gm.manageRollingDice[1])
+            {
+                Debug.Log("RRR");
+                GameManager.gm.manageRollingDice[1].gameObject.SetActive(false);
+                GameManager.gm.manageRollingDice[2].gameObject.SetActive(true);
+                GameManager.gm.manageRollingDice[2].MouseRoll();
+            }
+            else if (GameManager.gm.rollingd == GameManager.gm.manageRollingDice[2])
+            {
+                Debug.Log("RRR");
+                GameManager.gm.manageRollingDice[2].gameObject.SetActive(false);
+                GameManager.gm.manageRollingDice[3].gameObject.SetActive(true);
+                GameManager.gm.manageRollingDice[3].MouseRoll();
+            }
+            else if (GameManager.gm.rollingd == GameManager.gm.manageRollingDice[3])
+            {
+                Debug.Log("RRR");
+                GameManager.gm.manageRollingDice[3].gameObject.SetActive(false);
+                GameManager.gm.manageRollingDice[0].gameObject.SetActive(true);
+                //GameManager.gm.manageRollingDice[0].MouseRoll();
+            }
+
         }
         else
         {

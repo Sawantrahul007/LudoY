@@ -63,7 +63,7 @@ public class RollDice : MonoBehaviour
                 if (outpic == 0 && numberGot != 6)
                 {
 
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(1f);
                     GameManager.gm.isableToTransfer = true;
                 }
                 else
@@ -83,7 +83,7 @@ public class RollDice : MonoBehaviour
                         }
                         else
                         {
-                            yield return new WaitForSeconds(0.5f);
+                            yield return new WaitForSeconds(1f);
                             if (GameManager.gm.moveStep != 6) { GameManager.gm.isableToTransfer = true; }
                             else { GameManager.gm.selfDice = true; }
                         }
@@ -105,24 +105,95 @@ public class RollDice : MonoBehaviour
                             }
                             else
                             {
-                                yield return new WaitForSeconds(0.5f);
+                                yield return new WaitForSeconds(1f);
                                 if (GameManager.gm.moveStep != 6) { GameManager.gm.isableToTransfer = true; }
                                 else { GameManager.gm.selfDice = true; }
                             }
                         }
                     }
+                    //chng
+                    else if((GameManager.gm.totalplayercanplay == 7 || GameManager.gm.totalplayercanplay == 8) && GameManager.gm.rollingd == GameManager.gm.manageRollingDice[1])
+                    {
+                        Debug.Log("ysbdx");
+                        if (numberGot == 6 && outpic < 4)
+                        {
+                            MakePlayerReadyToMove(OutPlayerToMove1());
+                        }
+                        else
+                        {
+                            int playerPicePosition = Checkout();
+                            if (playerPicePosition >= 0)
+                            {
+                                GameManager.gm.isPlayerabletomove = false;
+                                moveplx = StartCoroutine(MoveObject(playerPicePosition));
+                            }
+                            else
+                            {
+                                yield return new WaitForSeconds(1f);
+                                if (GameManager.gm.moveStep != 6) { GameManager.gm.isableToTransfer = true; }
+                                else { GameManager.gm.selfDice = true; }
+                            }
+                        }
+                    }
+                    else if ((GameManager.gm.totalplayercanplay == 7 || GameManager.gm.totalplayercanplay == 8) && GameManager.gm.rollingd == GameManager.gm.manageRollingDice[2])
+                    {
+                        Debug.Log("hdjjfj");
+                        if (numberGot == 6 && outpic < 4)
+                        {
+                            MakePlayerReadyToMove(OutPlayerToMove2());
+                        }
+                        else
+                        {
+                            int playerPicePosition = Checkout();
+                            if (playerPicePosition >= 0)
+                            {
+                                GameManager.gm.isPlayerabletomove = false;
+                                moveplx = StartCoroutine(MoveObject(playerPicePosition));
+                            }
+                            else
+                            {
+                                yield return new WaitForSeconds(1f);
+                                if (GameManager.gm.moveStep != 6) { GameManager.gm.isableToTransfer = true; }
+                                else { GameManager.gm.selfDice = true; }
+                            }
+                        }
+                    }
+                    else if ((GameManager.gm.totalplayercanplay == 7 || GameManager.gm.totalplayercanplay == 8) && GameManager.gm.rollingd == GameManager.gm.manageRollingDice[3])
+                    {
+                        Debug.Log("hdjjfj");
+                        if (numberGot == 6 && outpic < 4)
+                        {
+                            MakePlayerReadyToMove(OutPlayerToMove3());
+                        }
+                        else
+                        {
+                            int playerPicePosition = Checkout();
+                            if (playerPicePosition >= 0)
+                            {
+                                GameManager.gm.isPlayerabletomove = false;
+                                moveplx = StartCoroutine(MoveObject(playerPicePosition));
+                            }
+                            else
+                            {
+                                yield return new WaitForSeconds(1f);
+                                if (GameManager.gm.moveStep != 6) { GameManager.gm.isableToTransfer = true; }
+                                else { GameManager.gm.selfDice = true; }
+                            }
+                        }
+                    }
+                    //chng
                     else
                     {
                         if (Checkout() < 0)
                         {
-                            yield return new WaitForSeconds(0.5f);
+                            yield return new WaitForSeconds(1f);
                             if (GameManager.gm.moveStep != 6) { GameManager.gm.isableToTransfer = true; }
                             else { GameManager.gm.selfDice = true; }
                         }
                     }
                 }
             }
-            yield return new WaitForSeconds(0.5f);
+            //yield return new WaitForSeconds(0.5f);
             GameManager.gm.RollingDiceManager();
             if (generateCortine != null)
             {
@@ -162,8 +233,20 @@ public class RollDice : MonoBehaviour
         //    GameManager.gm.isableToTransfer = true;
 
         //}
-       int OutPlayerToMove()
+        //chng
+        int OutPlayerToMove1()
         {
+            for (int i = 0; i < 4; i++)
+            {
+                if (!GameManager.gm.greenplayers[i].isReadyToMove)
+                {
+                    return i;
+                }
+            }
+            return 0;
+        }
+    int OutPlayerToMove2()
+    {
             for (int i = 0; i < 4; i++)
             {
                 if (!GameManager.gm.redplayers[i].isReadyToMove)
@@ -172,7 +255,31 @@ public class RollDice : MonoBehaviour
                 }
             }
             return 0;
+    }
+    int OutPlayerToMove3()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            if (!GameManager.gm.blueplayers[i].isReadyToMove)
+            {
+                return i;
+            }
         }
+        return 0;
+    }
+    //chng
+    int OutPlayerToMove()
+       {
+            for (int i = 0; i < 4; i++)
+            {
+                if (!GameManager.gm.redplayers[i].isReadyToMove)
+                {
+                    return i;
+                }
+            }
+            return 0;
+       }
+
        int Checkout()
         {
             if (GameManager.gm.rollingd == GameManager.gm.manageRollingDice[0]) { currentPlayerPice = GameManager.gm.yellowplayers; pathPointToMove = pathObjectParent.yellowPoints; }

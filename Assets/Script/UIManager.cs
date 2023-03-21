@@ -33,6 +33,24 @@ public class UIManager : MonoBehaviour
         gamepanel.SetActive(true);
         Game1Setting();
     }
+    public void Game7()
+    {
+        GameManager.gm.totalplayercanplay = 7;
+        mainpanel.SetActive(false);
+        gamepanel.SetActive(true);
+        Game7Setting();
+    }
+    public void Game8()
+    {
+        GameManager.gm.totalplayercanplay = 8;
+        mainpanel.SetActive(false);
+        gamepanel.SetActive(true);
+        
+    }
+    void Game7Setting()
+    {
+        Hideplayers(GameManager.gm.blueplayers);
+    }
     void Game1Setting()
     {
         Hideplayers(GameManager.gm.greenplayers);

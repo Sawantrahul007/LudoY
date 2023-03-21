@@ -82,6 +82,7 @@ public class PathPoints : MonoBehaviour
     }
     public void ShowCelebration()
     {
+        Debug.Log("Done");
 
     }
 }
